@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="app.css">
+    <title>study-list</title>
+</head>
+
+<body>
+    <header>
+        <h1>学習計画アプリー今日のタスクと教材管理</h1>
+
+        <nav>
+            <button class="tab active" id="homeBtn">ホーム</button>
+            <button class="tab" id="addBtn">教材追加</button>
+            <button class="tab" id="listBtn">一覧</button>
+        </nav>
+    </header>
+
+    <main>
+
+        <!--ホーム-->
+        <section id="homePage">
+            <h2>今日のタスク</h2>
+
+            <div id="taskContainer">
+                <p>教材を追加してください</p>
+            </div>
+        </section>
+
+        <section id="addPage" class="hidden">
+            <!--教材を追加-->
+            <form id="bookForm">
+                <input type="text" id="title" placeholder="教材名">
+
+                <input type="number" id="totalPages" placeholder="総ページ数">
+
+                <input type="number" id="currentPage" placeholder="現在ページ">
+
+                <input type="date" id="deadline">
+
+                <button type="submit">追加</button>
+            </form>
+        </section>
+
+        <!--一覧-->
+        <section id="listPage" class="hidden">
+            <h2>教材一覧</h2>
+
+            <div id="bookList"></div>
+
+        </section>
+
+
+
+    </main>
+
+
+
+
+
+    <script src="app.js"></script>
+</body>
+
+</html>

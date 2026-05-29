@@ -1,0 +1,59 @@
+body{
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #f5f5f5;
+}
+
+header{
+    background-color: white;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+h1{
+    margin-bottom: 30px;
+}
+
+nav {
+    display: flex;
+    gap: 40px;
+}
+
+.tab {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding-bottom: 10px;
+}
+
+.active {
+    border-bottom: 4px solid black;
+}
+/*メイン*/
+main {
+    padding: 30px;
+}
+
+/*ページ切り替え*/
+.hidden{
+    display: none;
+}
+
+/*フォーム*/
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 300px;
+}
+
+input {
+    padding: 10px;
+    font-size: 16px;
+}
+
+button{
+    padding: 10px;
+    font-size: 16px;
+}
