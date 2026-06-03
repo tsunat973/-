@@ -7,7 +7,7 @@ if (savedBooks) {
 }
 
 
-
+const clearBtn = document.querySelector('#clearBtn');
 const homeBtn = document.querySelector('#homeBtn');
 const addBtn = document.querySelector('#addBtn');
 const listBtn = document.querySelector('#listBtn');
@@ -17,6 +17,8 @@ const addPage = document.querySelector('#addPage');
 const listPage = document.querySelector('#listPage');
 
 const tabs = document.querySelectorAll('.tab');
+
+const taskContainer = document.querySelector('#taskContainer');
 //タブ切り替え
 function showPage(page) {
     homePage.classList.add('hidden');
@@ -87,6 +89,10 @@ bookForm.addEventListener('submit', function (e) {
 
     localStorage.setItem('books', JSON.stringify(books));
     renderBooks();
+    renderTodayTasks();
+
+    //　←ここでフォームを空にする
+    bookForm.requestFullscreen();
     console.log(books);
 
 })
@@ -96,19 +102,87 @@ bookForm.addEventListener('submit', function (e) {
 function renderBooks() {
     bookList.innerHTML = '';
 
-    books.forEach(book => {
+    books.forEach((book, index) => {
 
         const div = document.createElement('div');
 
         div.innerHTML = `
-        <h3>${book.title}</h3>
-        <p>${book.currentPage} / ${book.totalPages}</p>
-        <p>${book.deadline}</p>
-        `
+            <h3>${book.title}</h3>
+            <p>${book.currentPage} / ${book.totalPages}</p>
+            <p>${book.deadline}</p>
+            <button class="deleteBtn">削除</button>
+        `;
+
+        const deleteBtn = div.querySelector('.deleteBtn');
+
+        deleteBtn.addEventListener('click', () => {
+
+            books.splice(index, 1);
+
+            localStorage.setItem('books', JSON.stringify(books));
+
+            renderBooks();
+            renderTodayTasks();
+
+        });
+
         bookList.append(div);
+
     });
-    
-    bookForm.reset();
 }
 
+
+
+function renderTodayTasks() {
+    taskContainer.innerHTML = '';
+
+    books.forEach(book => {
+        const today = new Date();
+        const deadline = new Date(book.deadline);
+
+        const diffTime = deadline - today;
+        const remainingDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        const remainingPages = book.totalPages - book.currentPage;
+        const pagesPerDay = Math.ceil(remainingPages / remainingDays);
+
+        const startPage = book.currentPage + 1;
+        const endPage = book.currentPage + pagesPerDay;
+
+        const div = document.createElement('div');
+
+        div.innerHTML = `
+            <h3>${book.title}</h3>
+            <p>今日やる範囲：${startPage}〜${endPage}ページ</p>
+            <p>期限まであと${remainingDays}日</p>
+        `;
+
+        taskContainer.append(div);
+    })
+}
+
+
+
+clearBtn.addEventListener('click', () => {
+
+    const result = confirm('本当に全削除しますか？');
+
+    if(result){
+
+        books = [];
+
+        localStorage.removeItem('books');
+
+        renderBooks();
+        renderTodayTasks();
+
+    }
+
+});
+
+
+
+
+
 renderBooks();
+renderTodayTasks();
