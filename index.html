@@ -32,16 +32,27 @@
 
         <section id="addPage" class="hidden">
             <!--教材を追加-->
-            <form id="bookForm">
-                <input type="text" id="title" placeholder="教材名">
+            <form id="bookForm" class="form-card">
+                <div class="form-group">
+                    <label>教材名</label>
+                    <input type="text" id="title" placeholder="例：英単語ターゲット1900">
+                </div>
 
-                <input type="number" id="totalPages" placeholder="総ページ数">
+                <div class="form-group">
+                    <label>総ページ数</label>
+                    <input type="number" id="totalPages" placeholder="例：500">
+                </div>
 
-                <input type="number" id="currentPage" placeholder="現在ページ">
+                <div class="form-group">
+                    <label>現在ページ</label>
+                    <input type="number" id="currentPage" placeholder="例：120">
+                </div>
 
-                <input type="date" id="deadline">
-
-                <button type="submit">追加</button>
+                <div class="form-group">
+                    <label>期限</label>
+                    <input type="date" id="deadline">
+                </div>
+                <button type="submit">追加する</button>
             </form>
         </section>
 

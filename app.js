@@ -92,7 +92,7 @@ bookForm.addEventListener('submit', function (e) {
     renderTodayTasks();
 
     //　←ここでフォームを空にする
-    bookForm.requestFullscreen();
+    bookForm.reset();
     console.log(books);
 
 })
@@ -136,7 +136,7 @@ function renderBooks() {
 function renderTodayTasks() {
     taskContainer.innerHTML = '';
 
-    books.forEach(book => {
+    books.forEach((book, index) => {
         const today = new Date();
         const deadline = new Date(book.deadline);
 
@@ -147,15 +147,40 @@ function renderTodayTasks() {
         const pagesPerDay = Math.ceil(remainingPages / remainingDays);
 
         const startPage = book.currentPage + 1;
-        const endPage = book.currentPage + pagesPerDay;
+        const endPage = Math.min(book.currentPage + pagesPerDay, book.totalPages);
+
 
         const div = document.createElement('div');
 
+        //taskカードに変更
+        const progressPercent = Math.round((book.currentPage / book.totalPages) * 100);
+        const badgeClass = remainingDays <= 7 ? 'badge warn' : 'badge';
+
         div.innerHTML = `
-            <h3>${book.title}</h3>
-            <p>今日やる範囲：${startPage}〜${endPage}ページ</p>
-            <p>期限まであと${remainingDays}日</p>
-        `;
+            <div class="task-card">
+                <div class="task-card-header">
+                    <span class="task-title">${book.title}</span>
+                    <span class="${badgeClass}">あと${remainingDays}日</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width:${progressPercent}%"></div>
+                </div>
+                <div class="task-meta">
+                    <span class="task-range">今日: ${startPage}〜${endPage}ページ</span>
+                    <button class='completeBtn complete-btn'>完了</button>
+                </div>
+            </div>`;
+        const completeBtn = div.querySelector('.completeBtn');
+
+        completeBtn.addEventListener('click', () => {
+            books[index].currentPage = endPage;
+            localStorage.setItem('books', JSON.stringify(books));
+
+            renderBooks();
+            renderTodayTasks();
+        })
+
+
 
         taskContainer.append(div);
     })
@@ -167,7 +192,7 @@ clearBtn.addEventListener('click', () => {
 
     const result = confirm('本当に全削除しますか？');
 
-    if(result){
+    if (result) {
 
         books = [];
 

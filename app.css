@@ -41,19 +41,124 @@ main {
 }
 
 /*フォーム*/
-form {
+.form-card {
+    background: white;
+    border: 0.5px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 380px;
+}
+
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 0.5px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    background: #378ADD;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 4px;
+}
+
+.submit-btn:hover {
+    background: #2a6db5;
+}
+
+/*task-card追加*/
+#taskContainer {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    width: 300px;
+    gap: 12px;
 }
 
-input {
-    padding: 10px;
-    font-size: 16px;
+.task-card {
+    background: white;
+    border: 0.5px solid #ddd;
+    border-radius: 12px;
+    padding: 16px;
 }
 
-button{
-    padding: 10px;
-    font-size: 16px;
+.task-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.task-title{
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.badge {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 8px;
+    background: #e8f0fe;
+    color: #1a56b0;
+}
+
+.badge .warn {
+    background: #fff3cd;
+    color: #8a5f00;
+}
+
+.progress-bar {
+    background: #f0f0f0;
+    border-radius: 99px;
+    height: 6px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.progress-fill{
+    height: 100%;
+    border-radius: 99px;
+    background: #378ADD;
+}
+
+.task-meta{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-range {
+    font-size: 13px;
+    color: #666;
+}
+
+.complete-btn {
+    font-size: 12px;
+    padding: 5px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: none;
+    cursor: pointer;
+}
+
+.complete-btn:hover {
+    background: #f5f5f5;
 }
