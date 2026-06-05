@@ -162,3 +162,74 @@ main {
 .complete-btn:hover {
     background: #f5f5f5;
 }
+
+/* 一覧ヘッダー */
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.clear-btn {
+    font-size: 12px;
+    padding: 5px 12px;
+    border: 1px solid #e57373;
+    border-radius: 8px;
+    background: none;
+    cursor: pointer;
+    color: #e57373;
+}
+
+.clear-btn:hover {
+    background: #fff5f5;
+}
+
+/* 教材カード */
+#bookList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.book-card {
+    background: white;
+    border: 0.5px solid #ddd;
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.book-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.book-progress {
+    font-size: 12px;
+    color: #666;
+}
+
+.book-deadline {
+    font-size: 11px;
+    color: #999;
+    margin-bottom: 6px;
+    text-align: right;
+}
+
+.delete-btn {
+    font-size: 11px;
+    padding: 4px 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: none;
+    cursor: pointer;
+    color: #666;
+}
+
+.delete-btn:hover {
+    background: #f5f5f5;
+}

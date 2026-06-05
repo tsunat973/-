@@ -6,7 +6,13 @@ if (savedBooks) {
     books = JSON.parse(savedBooks);
 }
 
+const todayStr = new Date().toLocaleDateString();
+const completedToday = JSON.parse(localStorage.getItem('completedToday') || '{}');
 
+// 日付が変わったらリセット
+if (completedToday.date !== todayStr) {
+    localStorage.setItem('completedToday', JSON.stringify({ date: todayStr, indexes: [] }));
+}
 const clearBtn = document.querySelector('#clearBtn');
 const homeBtn = document.querySelector('#homeBtn');
 const addBtn = document.querySelector('#addBtn');
@@ -105,12 +111,19 @@ function renderBooks() {
     books.forEach((book, index) => {
 
         const div = document.createElement('div');
+        const percent = Math.round((book.currentPage / book.totalPages) * 100);
 
         div.innerHTML = `
-            <h3>${book.title}</h3>
-            <p>${book.currentPage} / ${book.totalPages}</p>
-            <p>${book.deadline}</p>
-            <button class="deleteBtn">削除</button>
+            <div class="book-card">
+                <div class="book-info">
+                    <div class="book-title">${book.title}</div>
+                    <div class="book-progress">${book.currentPage} / ${book.totalPages}ページ　${percent}%</div>
+                </div>
+                 <div class="book-right">
+                    <div class="book-deadline">期限: ${book.deadline}</div>
+                    <button class="deleteBtn delete-btn">削除</button>
+                </div>
+            </div>
         `;
 
         const deleteBtn = div.querySelector('.deleteBtn');
@@ -134,6 +147,11 @@ function renderBooks() {
 
 
 function renderTodayTasks() {
+    books.forEach((book, index) => {
+        //今日完了済みならスキップ
+        const completed = JSON.parse(localStorage.getItem('completedToday'));
+        if (completed.indexes.includes(index)) return;
+    })
     taskContainer.innerHTML = '';
 
     books.forEach((book, index) => {
@@ -175,6 +193,11 @@ function renderTodayTasks() {
         completeBtn.addEventListener('click', () => {
             books[index].currentPage = endPage;
             localStorage.setItem('books', JSON.stringify(books));
+
+            //今日完了済みに追加
+            const completed = JSON.parse(localStorage.getItem('completedToday'));
+            completed.indexes.push(index);
+            localStorage.setItem('completedToday', JSON.stringify(completed));
 
             renderBooks();
             renderTodayTasks();
