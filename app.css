@@ -1,191 +1,265 @@
-body{
-    font-family: sans-serif;
+*, *::before, *::after {
+    box-sizing: border-box;
     margin: 0;
-    background-color: #f5f5f5;
+    padding: 0;
 }
 
-header{
-    background-color: white;
-    padding: 20px;
-    border-bottom: 1px solid #ddd;
+:root {
+    --bg: #1f1f1f;
+    --bg-card: #282828;
+    --bg-hover: #2f2f2f;
+    --border: #3a3a3a;
+    --text-primary: #e8e8e8;
+    --text-secondary: #9a9a9a;
+    --text-muted: #666;
+    --accent: #db4035;
+    --accent-hover: #c93025;
+    --blue: #4a9eff;
+    --green: #5cb85c;
+    --radius: 10px;
 }
 
-h1{
-    margin-bottom: 30px;
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+}
+
+header {
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header h1 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
 }
 
 nav {
     display: flex;
-    gap: 40px;
+    gap: 4px;
 }
 
 .tab {
     background: none;
     border: none;
-    font-size: 24px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--text-secondary);
     cursor: pointer;
-    padding-bottom: 10px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    transition: background 0.15s, color 0.15s;
 }
 
-.active {
-    border-bottom: 4px solid black;
+.tab:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
 }
-/*メイン*/
+
+.tab.active {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
 main {
-    padding: 30px;
+    padding: 24px;
+    max-width: 640px;
 }
 
-/*ページ切り替え*/
-.hidden{
+h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+
+.hidden {
     display: none;
 }
 
-/*フォーム*/
-.form-card {
-    background: white;
-    border: 0.5px solid #ddd;
-    border-radius: 12px;
-    padding: 20px;
-    max-width: 380px;
-}
-
-.form-group {
-    margin-bottom: 14px;
-}
-
-.form-group label {
-    display: block;
-    font-size: 12px;
-    color: #666;
-    margin-bottom: 5px;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 8px 12px;
-    font-size: 14px;
-    border: 0.5px solid #ccc;
-    border-radius: 8px;
-    box-sizing: border-box;
-}
-
-.submit-btn {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    font-weight: 500;
-    background: #378ADD;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 4px;
-}
-
-.submit-btn:hover {
-    background: #2a6db5;
-}
-
-/*task-card追加*/
+/* タスクカード */
 #taskContainer {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .task-card {
-    background: white;
-    border: 0.5px solid #ddd;
-    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
     padding: 16px;
+    transition: border-color 0.15s;
+}
+
+.task-card:hover {
+    border-color: #555;
 }
 
 .task-card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
-.task-title{
-    font-size: 15px;
+.task-title {
+    font-size: 14px;
     font-weight: 500;
+    color: var(--text-primary);
 }
 
 .badge {
     font-size: 11px;
     padding: 3px 8px;
-    border-radius: 8px;
-    background: #e8f0fe;
-    color: #1a56b0;
+    border-radius: 99px;
+    background: rgba(74,158,255,0.15);
+    color: var(--blue);
+    font-weight: 500;
 }
 
-.badge .warn {
-    background: #fff3cd;
-    color: #8a5f00;
+.badge.warn {
+    background: rgba(219,64,53,0.15);
+    color: var(--accent);
 }
 
 .progress-bar {
-    background: #f0f0f0;
+    background: #333;
     border-radius: 99px;
-    height: 6px;
-    margin-bottom: 10px;
+    height: 4px;
+    margin-bottom: 12px;
     overflow: hidden;
 }
 
-.progress-fill{
+.progress-fill {
     height: 100%;
     border-radius: 99px;
-    background: #378ADD;
+    background: linear-gradient(90deg, var(--blue), #7ec8ff);
 }
 
-.task-meta{
+.task-meta {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .task-range {
-    font-size: 13px;
-    color: #666;
+    font-size: 12px;
+    color: var(--text-secondary);
 }
 
 .complete-btn {
     font-size: 12px;
     padding: 5px 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
     background: none;
     cursor: pointer;
+    color: var(--text-secondary);
+    font-family: inherit;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 
 .complete-btn:hover {
-    background: #f5f5f5;
+    background: var(--green);
+    border-color: var(--green);
+    color: white;
 }
 
-/* 一覧ヘッダー */
+/* フォーム */
+.form-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    max-width: 400px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-family: inherit;
+    background: #333;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.form-group input:focus {
+    border-color: var(--blue);
+}
+
+.form-group input::placeholder {
+    color: var(--text-muted);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: inherit;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: background 0.15s;
+}
+
+.submit-btn:hover {
+    background: var(--accent-hover);
+}
+
+/* 一覧 */
 .list-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 .clear-btn {
     font-size: 12px;
     padding: 5px 12px;
-    border: 1px solid #e57373;
-    border-radius: 8px;
+    border: 1px solid #5a2a2a;
+    border-radius: 6px;
     background: none;
     cursor: pointer;
-    color: #e57373;
+    color: var(--accent);
+    font-family: inherit;
+    transition: background 0.15s;
 }
 
 .clear-btn:hover {
-    background: #fff5f5;
+    background: rgba(219,64,53,0.1);
 }
 
-/* 教材カード */
 #bookList {
     display: flex;
     flex-direction: column;
@@ -193,13 +267,18 @@ main {
 }
 
 .book-card {
-    background: white;
-    border: 0.5px solid #ddd;
-    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
     padding: 14px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: border-color 0.15s;
+}
+
+.book-card:hover {
+    border-color: #555;
 }
 
 .book-title {
@@ -210,12 +289,12 @@ main {
 
 .book-progress {
     font-size: 12px;
-    color: #666;
+    color: var(--text-secondary);
 }
 
 .book-deadline {
     font-size: 11px;
-    color: #999;
+    color: var(--text-muted);
     margin-bottom: 6px;
     text-align: right;
 }
@@ -223,13 +302,17 @@ main {
 .delete-btn {
     font-size: 11px;
     padding: 4px 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
     background: none;
     cursor: pointer;
-    color: #666;
+    color: var(--text-secondary);
+    font-family: inherit;
+    transition: background 0.15s, color 0.15s;
 }
 
 .delete-btn:hover {
-    background: #f5f5f5;
+    background: rgba(219,64,53,0.15);
+    color: var(--accent);
+    border-color: #5a2a2a;
 }

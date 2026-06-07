@@ -147,14 +147,12 @@ function renderBooks() {
 
 
 function renderTodayTasks() {
-    books.forEach((book, index) => {
-        //今日完了済みならスキップ
-        const completed = JSON.parse(localStorage.getItem('completedToday'));
-        if (completed.indexes.includes(index)) return;
-    })
     taskContainer.innerHTML = '';
 
     books.forEach((book, index) => {
+        const completed = JSON.parse(localStorage.getItem('completedToday'));
+        if (completed.indexes.includes(index)) return;
+        
         const today = new Date();
         const deadline = new Date(book.deadline);
 
