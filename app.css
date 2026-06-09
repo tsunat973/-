@@ -316,3 +316,26 @@ h2 {
     color: var(--accent);
     border-color: #5a2a2a;
 }
+
+.book-info{
+    flex: 1;
+    margin-right: 16px;
+}
+
+.check-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(92,184,92,0.15);
+    border-radius: var(--radius);
+    font-size: 40px; 
+    animation: checkPop 0.4s ease forwards;
+}
+
+@keyframes checkPop {
+    0% {opacity: 0; transform: scale(0.5);}
+    60% {opacity: 1; transform: scale(1.2);}
+    100% {opacity: 1; transform: scale(1);}
+}
