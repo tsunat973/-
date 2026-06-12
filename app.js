@@ -154,6 +154,24 @@ function renderBooks() {
 function renderTodayTasks() {
     taskContainer.innerHTML = '';
 
+    //教材がない場合(既存)
+    if(books.length === 0) {
+        taskContainer.innerHTML = '<p>教材を追加してください</p>';
+        return;
+    }
+
+    const completed = JSON.parse(localStorage.getItem('completedToday'));
+
+    //全タスク完了チェック
+    const allDone = books.every((_, index) => 
+        completed.indexes.includes(index)
+    );
+
+    if (allDone) {
+        taskContainer.innerHTML = '<P>🎊今日のタスク完了！</p>';
+        return;
+    }
+    
     books.forEach((book, index) => {
         const completed = JSON.parse(localStorage.getItem('completedToday'));
         if (completed.indexes.includes(index)) return;
